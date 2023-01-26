@@ -11,4 +11,5 @@ Neofetch for laptop batteries
 ## Configuration
 
 You can configure it through config.json
+
 It should be pretty self-explanatory.
