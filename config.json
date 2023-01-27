@@ -1,57 +1,46 @@
 {
-    "chargechar" : "\u001b[0;32;42m█\u001b[0;0m",
-    "emptychar" : "░",
-    "indent" : 2,
+    "chargechar": "█",
+    "emptychar": "░",
+    "indent": 2,
     "rounding_precision": 2,
-    "lines" : [
-        [
-            "!Model"
-        ],
-        [
-            "!Vendor", "; serial-", "!Serial"
-        ],
-        [
-            "!Energy", " Wh"
-        ],
-        [
-            "!Percentage", "% charged"
-        ],
-        [
-            "!Capacity", "% of capacity"
-        ]
+    "display_info": [
+        ["!Model"],
+        ["!Vendor", "; serial-", "!Serial"],
+        ["!Energy", " Wh"],
+        ["!Percentage", "% charged"],
+        ["!Capacity", "% of capacity"],
     ],
     
-    "BatteryAttributesList" : [
-    "HasHistory",
-    "HasStatistics",
-    "IsPresent",
-    "IsRechargeable",
-    "Online",
-    "PowerSupply",
-    "Capacity",
-    "Energy",
-    "EnergyEmpty",
-    "EnergyFull",
-    "EnergyFullDesign",
-    "EnergyRate",
-    "Luminosity",
-    "Percentage",
-    "Temperature",
-    "Voltage",
-    "TimeToEmpty",
-    "TimeToFull",
-    "IconName",
-    "Model",
-    "NativePath",
-    "Serial",
-    "Vendor",
-    "State",
-    "Technology",
-    "Type",
-    "WarningLevel",
-    "UpdateTime"
+    "BatteryAttributesList": [
+        "HasHistory",
+        "HasStatistics",
+        "IsPresent",
+        "IsRechargeable",
+        "Online",
+        "PowerSupply",
+        "Capacity",
+        "Energy",
+        "EnergyEmpty",
+        "EnergyFull",
+        "EnergyFullDesign",
+        "EnergyRate",
+        "Luminosity",
+        "Percentage",
+        "Temperature",
+        "Voltage",
+        "TimeToEmpty",
+        "TimeToFull",
+        "IconName",
+        "Model",
+        "NativePath",
+        "Serial",
+        "Vendor",
+        "State",
+        "Technology",
+        "Type",
+        "WarningLevel",
+        "UpdateTime"
     ],
 
-    "BatteryPath" : "/org/freedesktop/UPower/devices/battery_BAT0"
-
+    "BatteryPath": "/org/freedesktop/UPower/devices/battery_BAT0"
 }
