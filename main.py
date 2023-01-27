@@ -9,8 +9,16 @@ with open("config.json") as config_file:
 
 upower_handler = upower.UPowerManager()
 battery_info = upower_handler.get_full_device_information(config["BatteryPath"])
+rounding_precision = int(config["rounding_precision"])
 
 ANSI_REGEX = r"\x1B[\[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]"
+
+def is_float(s: str) -> bool:
+    try:
+        float(s)
+        return True
+    except:
+        return False
 
 def stripANSI(s: str) -> str: return re.sub(ANSI_REGEX, "", s)
 def gen_image():
@@ -37,8 +45,10 @@ for i in gen_image().split("\n"):
     text = ""
     for l in config["lines"][j]:
         if l[0] == "!" and l.replace("!", "") in config["BatteryAttributesList"]:
-            
-            text += str(battery_info[l.replace("!", "")])
+            binfo = str(battery_info[l.replace("!", "")])
+            if is_float(binfo):
+                binfo = str(round(float(binfo), rounding_precision))
+            text += binfo
     
         else:
             text +=l
