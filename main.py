@@ -16,9 +16,9 @@ ANSI_REGEX = r"\x1B[\[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]
 def is_float(s: str) -> bool:
     try:
         float(s)
-        return true
+        return True
     except:
-        return false
+        return False
 
 def stripANSI(s: str) -> str: return re.sub(ANSI_REGEX, "", s)
 def gen_image():
