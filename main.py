@@ -13,6 +13,13 @@ rounding_precision = int(config["rounding_precision"])
 
 ANSI_REGEX = r"\x1B[\[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]"
 
+def is_float(s: str) -> bool:
+    try:
+        float(s)
+        return true
+    except:
+        return false
+
 def stripANSI(s: str) -> str: return re.sub(ANSI_REGEX, "", s)
 def gen_image():
     battery_asciiart = ""
@@ -39,7 +46,7 @@ for i in gen_image().split("\n"):
     for l in config["lines"][j]:
         if l[0] == "!" and l.replace("!", "") in config["BatteryAttributesList"]:
             binfo = str(battery_info[l.replace("!", "")])
-            if binfo.isnumeric():
+            if is_float(binfo):
                 binfo = str(round(int(binfo), rounding_precision))
             text += binfo
     
