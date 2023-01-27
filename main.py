@@ -2,60 +2,51 @@
 import os
 import upower
 import json
-import re
+from colorama import Fore, Back, Style
 
 with open("config.json") as config_file:
     config = json.load(config_file)
 
 upower_handler = upower.UPowerManager()
-battery_info = upower_handler.get_full_device_information(config["BatteryPath"])
-rounding_precision = int(config["rounding_precision"])
+binfo = upower_handler.get_full_device_information(config["BatteryPath"])
 
-ANSI_REGEX = r"\x1B[\[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]"
+percent = binfo["Percentage"]
 
-def is_float(s: str) -> bool:
-    try:
-        float(s)
-        return True
-    except:
-        return False
+fullchar_length = round((percent/100)*20)
+emptychar_length = 20-fullchar_length
+charge_bar = fullchar_length * config["chargechar"]
 
-def stripANSI(s: str) -> str: return re.sub(ANSI_REGEX, "", s)
-def gen_image():
-    battery_asciiart = ""
-    percent = battery_info["Percentage"]
-    
-    fullchar_length = round((percent/100)*20)
-    emptychar_length = 20-fullchar_length
-    charge_bar = fullchar_length * config["chargechar"] + emptychar_length * config["emptychar"]
+if config["barcolourchanger"]:
 
-    battery_asciiart = "╔════════════════════╗\n║" \
-                         + charge_bar \
-                         + "╚╗\n║" \
-                         + charge_bar \
-                         + " ║\n║" \
-                         + charge_bar \
-                         + "╔╝" \
-                         + "\n╚════════════════════╝"
-    return battery_asciiart
+    # change bar color depending on the battery percentage
+    if percent > 40:   charge_bar = Fore.GREEN + charge_bar + Style.RESET_ALL
+    elif percent > 20: charge_bar = Fore.YELLOW + charge_bar + Style.RESET_ALL
+    else:              charge_bar = Fore.RED + charge_bar + Style.RESET_ALL
 
-j = 0
-for i in gen_image().split("\n"):
-    
-    text = ""
-    for l in config["lines"][j]:
-        if l[0] == "!" and l.replace("!", "") in config["BatteryAttributesList"]:
-            binfo = str(battery_info[l.replace("!", "")])
-            if is_float(binfo):
-                binfo = str(round(float(binfo), rounding_precision))
-            text += binfo
-    
-        else:
-            text +=l
-    j += 1
-    
-    print(i+(23-len(stripANSI(i))+config["indent"])*" "+text)
-          
-    
-    
-        
+charge_bar += emptychar_length * config["emptychar"]
+
+battery_asciiart = f"""\
+╔════════════════════╗ 
+║{charge_bar}╚╗
+║{charge_bar} ║
+║{charge_bar}╔╝
+╚════════════════════╝ 
+"""
+battery_asciiart += ((' '*23) + '\n')*round(len(config['display_info'])-5) 
+
+
+try:
+    for idx, line in enumerate(battery_asciiart.split('\n')[:-1]):
+        print(line, end=' '*config["indent"])
+        for l in config["display_info"][idx]:
+            if l[0] == '!':
+                if str(type(binfo[l[1:]])) != "<class 'dbus.String'>":
+                    print(str(round(binfo[l[1:]], config["rounding_precision"])), end="")
+                    continue
+                print(str(binfo[l[1:]]), end="")
+            else:
+                print(l, end="")
+        print()
+except IndexError:
+    pass
+print()
