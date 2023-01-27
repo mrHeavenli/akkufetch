@@ -1,5 +1,5 @@
 {
-    "chargechar" : "█",
+    "chargechar" : "\u001b[0;32;42m█\u001b[0;0m",
     "emptychar" : "░",
     "indent" : 2,
     "lines" : [
