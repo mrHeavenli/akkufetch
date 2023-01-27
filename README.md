@@ -1,5 +1,5 @@
 # Akkufetch
-<img src="https://github.com/mrHeavenli/akkufetch/blob/main/akkufetch.png"
+<img src="https://github.com/mrHeavenli/akkufetch/blob/main/akkufetch.jpg"
      width="584"
      height = "116">
 </img>
