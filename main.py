@@ -2,6 +2,7 @@
 import os
 import upower
 import json
+import re
 
 with open("config.json") as config_file:
     config = json.load(config_file)
@@ -9,7 +10,9 @@ with open("config.json") as config_file:
 upower_handler = upower.UPowerManager()
 battery_info = upower_handler.get_full_device_information(config["BatteryPath"])
 
+ANSI_REGEX = r"\x1B[\[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]"
 
+def stripANSI(s: str) -> str: return re.sub(ANSI_REGEX, "", s)
 def gen_image():
     battery_asciiart = ""
     percent = battery_info["Percentage"]
@@ -40,8 +43,8 @@ for i in gen_image().split("\n"):
         else:
             text +=l
     j += 1
-
-    print(i+(23-len(i)+config["indent"])*" "+text)
+    
+    print(i+(23-len(stripANSI(i))+config["indent"])*" "+text)
           
     
     
