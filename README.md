@@ -1,8 +1,6 @@
 # Akkufetch
-<img src="https://ibb.co/SyN5q4Y"
-     width="584"
-     height = "116">
-</img>
+
+<img src="https://github.com/mrHeavenli/akkufetch/blob/main/akkufetch.jpg"></img>
 
 ## What is it?
 
