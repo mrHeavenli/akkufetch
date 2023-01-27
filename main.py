@@ -47,7 +47,7 @@ for i in gen_image().split("\n"):
         if l[0] == "!" and l.replace("!", "") in config["BatteryAttributesList"]:
             binfo = str(battery_info[l.replace("!", "")])
             if is_float(binfo):
-                binfo = str(round(int(binfo), rounding_precision))
+                binfo = str(round(float(binfo), rounding_precision))
             text += binfo
     
         else:
