@@ -8,7 +8,7 @@
         ["!Vendor", "; serial-", "!Serial"],
         ["!Energy", " Wh"],
         ["!Percentage", "% charged"],
-        ["!Capacity", "% of capacity"],
+        ["!Capacity", "% of capacity"]
     ],
     
     "BatteryAttributesList": [
