@@ -34,14 +34,19 @@ battery_asciiart = f"""\
 """
 battery_asciiart += ((' '*23) + '\n')*round(len(config['display_info'])-5) 
 
-for idx, line in enumerate(battery_asciiart.split('\n')[:-1]):
-    print(line, end=' '*config["indent"])
-    for l in config["display_info"][idx]:
-        if l[0] == '!':
-            if str(type(binfo[l[1:]])) != "<class 'dbus.String'>":
-                print(str(round(binfo[l[1:]], config["rounding_precision"])), end="")
-                continue
-            print(str(binfo[l[1:]]), end="")
-        else:
-            print(l, end="")
-    print()
+
+try:
+    for idx, line in enumerate(battery_asciiart.split('\n')[:-1]):
+        print(line, end=' '*config["indent"])
+        for l in config["display_info"][idx]:
+            if l[0] == '!':
+                if str(type(binfo[l[1:]])) != "<class 'dbus.String'>":
+                    print(str(round(binfo[l[1:]], config["rounding_precision"])), end="")
+                    continue
+                print(str(binfo[l[1:]]), end="")
+            else:
+                print(l, end="")
+        print()
+except IndexError:
+    pass
+print()
