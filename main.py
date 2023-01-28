@@ -16,10 +16,13 @@ fullchar_length = round((percent/100)*20)
 emptychar_length = 20-fullchar_length
 charge_bar = fullchar_length * config["chargechar"]
 
-# change bar color depending on the battery percentage
-if percent > 40:   charge_bar = Fore.GREEN + charge_bar + Style.RESET_ALL
-elif percent > 20: charge_bar = Fore.YELLOW + charge_bar + Style.RESET_ALL
-else:              charge_bar = Fore.RED + charge_bar + Style.RESET_ALL
+if config["barcolourchanger"]:
+
+    # change bar color depending on the battery percentage
+    if percent > 40:   charge_bar = Fore.GREEN + charge_bar + Style.RESET_ALL
+    elif percent > 20: charge_bar = Fore.YELLOW + charge_bar + Style.RESET_ALL
+    else:              charge_bar = Fore.RED + charge_bar + Style.RESET_ALL
+
 charge_bar += emptychar_length * config["emptychar"]
 
 battery_asciiart = f"""\

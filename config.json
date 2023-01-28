@@ -1,6 +1,7 @@
 {
     "chargechar": "█",
     "emptychar": "░",
+    "barcolourchanger" : true,
     "indent": 2,
     "rounding_precision": 2,
     "display_info": [
