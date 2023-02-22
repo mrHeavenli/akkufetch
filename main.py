@@ -3,9 +3,14 @@ import os
 import upower
 import json
 from colorama import Fore, Back, Style
+import sys
 
-with open("config.json") as config_file:
-    config = json.load(config_file)
+if len(sys.argv) == 1:
+    with open(os.path.expanduser("~/.config/akkufetch/config")) as config_file:
+        config = json.load(config_file)
+else:
+    with open(os.path.expanduser(sys.argv[1])) as config_file:
+        config = json.load(config_file)
 
 upower_handler = upower.UPowerManager()
 binfo = upower_handler.get_full_device_information(config["BatteryPath"])
