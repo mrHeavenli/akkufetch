@@ -11,4 +11,4 @@ Neofetch for laptop batteries
 You can configure it through ~/.config/akkufetch/config or pass the path to a different file as a commandline argument.
 I've provided a decent default.
 
-It should be pretty self-explanatory.
+The rest should be pretty self-explanatory.
