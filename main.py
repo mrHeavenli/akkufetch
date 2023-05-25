@@ -6,8 +6,12 @@ from colorama import Fore, Back, Style
 import sys
 
 if len(sys.argv) == 1:
-    with open(os.path.expanduser("~/.config/akkufetch/config")) as config_file:
-        config = json.load(config_file)
+    try: f = open("/etc/akkufetch.config")
+    except FileNotFoundError:
+        try: f = open(os.path.expanduser("~/.config/akkufetch.config"))
+        except FileNotFoundError: print("Config file not found."); exit(0)
+
+    config = json.load(f)
 else:
     with open(os.path.expanduser(sys.argv[1])) as config_file:
         config = json.load(config_file)
