@@ -12,3 +12,8 @@ You can configure it through ~/.config/akkufetch/config or pass the path to a di
 I've provided a decent default.
 
 It should be pretty self-explanatory.
+
+## Installation
+
+[Some nerd put it on the AUR](https://aur.archlinux.org/packages/akkufetch-git)
+
