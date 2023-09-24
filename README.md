@@ -23,9 +23,10 @@ To migrate from the old .json config check the new keys in ``examples/akkufetch.
 - python3
 - dbus
 
-``git clone https://github.com/mrHeavenli/akkufetch``  
-``chmod +x akkufetch/src/akkufetch.py``  
-``ln -sf akkufetch/src/akkufetch.py /usr/bin/akkufetch``
+``git clone https://github.com/mrHeavenli/akkufetch``
+``chmod +x akkufetch/src/main.py``
+``sudo mv akkufetch /usr/share``    
+``ln -sf /usr/share/akkufetch/src/main.py /usr/bin/akkufetch``
 
 ### Arch Linux
 ``yay -S akkufetch-git``

@@ -1,9 +1,9 @@
-from os.path import isfile
+from os.path import isfile, expanduser
 from tomllib import load, TOMLDecodeError
 from json import load as json_load, JSONDecodeError
 
 CONFIG_FILENAME = "akkufetch.toml"
-USER_CONFIG = f"~/.config/{CONFIG_FILENAME}"
+USER_CONFIG = expanduser(f"~/.config/{CONFIG_FILENAME}")
 SYSTEM_CONFIG = f"/etc/{CONFIG_FILENAME}"
 FALLBACK_CONFIG = f"{__file__.removesuffix('/config.py')}/../examples/{CONFIG_FILENAME}"
 
@@ -53,7 +53,7 @@ class Config:
         raise KeyError(f"Key '{'.'.join(items)}' not found in any config file. Is the fallback config bricked?")
 
     def generate_dynamic(self, percentage):
-        if "dynamic" in self["colors"]:
+        if "dynamic" in self["colors"] and self["colors.dynamic"]:
             configured = False
             for setting in self["colors.dynamic"]:
                 if percentage in range(setting[0], setting[1]):
@@ -63,7 +63,7 @@ class Config:
 
             if not configured: raise KeyError(f"'colors.dynamic_colors' is incorrectly configured. Percentage {int(percentage) if int(percentage) == percentage else percentage} not configured.")
 
-        if self["battery_art.dynamic"]:
+        if "dynamic" in self["battery_art"] and self["battery_art.dynamic"]:
             amount = len(self["system_info.format"])
 
             if amount >= 7:
@@ -98,3 +98,12 @@ class Config:
                         ]
 
         return translated
+
+    @staticmethod
+    def generate_config():
+        try:
+            with open(USER_CONFIG, "x"): pass
+        except FileExistsError: exit(f"Config file at {USER_CONFIG} already exists.")
+
+        with open(USER_CONFIG, "wt") as f:
+            f.write(open(FALLBACK_CONFIG, "rt").read())
