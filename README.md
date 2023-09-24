@@ -1,19 +1,31 @@
 # Akkufetch
 
-<img src="https://github.com/mrHeavenli/akkufetch/blob/main/akkufetch.jpg"></img>
+Akkufetch is a minimal, highly customizable tool that displays battery information.
 
-## What is it?
+## Example
 
-Neofetch for laptop batteries
+<img src="./examples/screenshot.png"/></img>
 
 ## Configuration
 
-You can configure it through ~/.config/akkufetch/config or pass the path to a different file as a commandline argument.
-I've provided a decent default.
+Configurable through
+``/etc/akkufetch.toml, ~/.config/akkufetch.toml``  
+or by using the ``-c <config>`` flag.
 
-It should be pretty self-explanatory.
+If a value is not found in the ``~/.config/akkufetch.toml`` config it checks ``/etc/akkufetch.toml``and otherwise uses the default.
+
+To migrate from the old .json config check the new keys in ``examples/akkufetch.toml``
 
 ## Installation
 
-[Some nerd put it on the AUR](https://aur.archlinux.org/packages/akkufetch-git)
+### From source
+#### Dependencies
+- python3
+- dbus
 
+``git clone https://github.com/mrHeavenli/akkufetch``  
+``chmod +x akkufetch/src/akkufetch.py``  
+``ln -sf akkufetch/src/akkufetch.py /usr/bin/akkufetch``
+
+### Arch Linux
+``yay -S akkufetch-git``

@@ -1,0 +1,42 @@
+
+battery_path = "/org/freedesktop/UPower/devices/battery_BAT0"
+
+[chars]
+charged =  "█"
+charging = "▓"  # If you're using Meslo Nerd fonts ⚡ won't work.
+empty =    "░"
+
+[colors]
+reset =   "\u001b[0m"
+#charged = "\u001b[32m"
+
+dynamic = [  # overrides charged
+    [0, 20, "\u001b[31m"],
+    [20, 40, "\u001b[33m"],
+    [40, 101, "\u001b[32m"]  # exclusive range
+]
+
+[battery_art]
+#height = 17
+#width = 5
+#horizontal = false
+
+#height = 8
+#width = 11
+#horizontal = true
+
+# This automatically scales the battery to fit the amount of your 'system_info.format' items.
+dynamic = true  # (disables height, width and horizontal params)
+
+[system_info]
+float_precision = 2
+indent = 2
+
+# A full list & explanation of format params can be found at https://upower.freedesktop.org/docs/Device.html
+format = [
+    "$Model from $Vendor",
+    "Percentage: $Percentage%",
+    "Current Consumption: $Energy Wh",
+    "Temperature: $Temperature",
+    "Max Capacity: $Capacity",
+]
