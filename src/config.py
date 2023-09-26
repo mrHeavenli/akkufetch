@@ -65,6 +65,7 @@ class Config:
 
         if "dynamic" in self["battery_art"] and self["battery_art.dynamic"]:
             amount = len(self["system_info.format"])
+            if amount < 4: amount = 4
 
             if amount >= 7:
                 self.override["battery_art.height"] = amount
